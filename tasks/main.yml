@@ -1,2 +1,16 @@
 ---
 # tasks file for Nainterceptor.nginx-redirect
+- name: "Ensure apache is absent"
+  yum: name=httpd state=absent
+  when: ansible_distribution == 'CentOS'
+
+- name: "nginx packages"
+  yum: name=nginx state=present
+  when: ansible_distribution == 'CentOS'
+
+- name: "Configure nginx"
+  template: src=../files/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  when: ansible_distribution == 'CentOS'
+  notify:
+    - Enable nginx
+    - Restart nginx

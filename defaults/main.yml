@@ -1,2 +1,3 @@
 ---
 # defaults file for Nainterceptor.nginx-redirect
+domain_to_redirect: domain.tld
